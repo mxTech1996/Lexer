@@ -15,9 +15,10 @@ const Navbar = () => {
 
   return (
     <NavbarV2
+      withSearch={false}
       linksProps={{
         variant: 'underline',
-        align: 'left',
+        align: 'right',
       }}
       textColor='black'
       withLogo={true}
@@ -32,6 +33,7 @@ const Navbar = () => {
       }}
       links={navData}
       onClickProduct={(product) => {
+        console.log('product', product);
         router.push(`/product/${product.id}`);
       }}
       buttonCartProps={{
@@ -40,7 +42,10 @@ const Navbar = () => {
       buttonContactProps={{
         onClick: () => router.push('/more-information'),
       }}
-      onRedirect={(path) => router.push(path)}
+      onRedirect={(path) => {
+        console.log('path', path);
+        router.push(path);
+      }}
       styleHeader={{
         height: 100,
         color: 'black',

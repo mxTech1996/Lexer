@@ -1,4 +1,4 @@
-export const pageName = 'AKWC';
+export const pageName = 'Lexer';
 export const primaryColor = '#000000';
 export const backgroundColor = '#FFFFFF';
 export const makeClearBackground = (color) => {

@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <main
       style={{
-        backgroundColor: '#DEF8EBFF',
+        backgroundColor: '#DEF6F8FF',
       }}
     >
       <Navbar />
@@ -78,13 +78,13 @@ export default function Home() {
             <ProductSection
               withCategoryFilter={false}
               title='All Courses'
-              gridColumns={4}
+              gridColumns={2}
               variant='grid'
               productItemVariant='vertical'
               onClickImage={(id) => {
                 router.push(`/product/${id}`);
               }}
-              productVersion='2'
+              productVersion='1'
               carouselOptions={{
                 arrowColor: 'black',
                 fade: true,
@@ -112,7 +112,7 @@ export default function Home() {
             }}
             variantItem='card'
             variant='grid'
-            backgroundColor='#CFE5BAFF'
+            backgroundColor='#BADEE5FF'
             references={dataSite.references}
             gridColumns={3}
             titleAlign='center'
