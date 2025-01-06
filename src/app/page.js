@@ -114,7 +114,7 @@ export default function Home() {
             variant='grid'
             backgroundColor='#BADEE5FF'
             references={dataSite.references}
-            gridColumns={3}
+            gridColumns={2}
             titleAlign='center'
           />
         </div>
