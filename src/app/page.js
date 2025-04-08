@@ -6,19 +6,13 @@ import {
   Typography,
   Hero,
   Features,
-  FeaturesV2,
 } from 'ecommerce-mxtech';
 import { useRouter } from 'next/navigation';
 import Footer from '@/components/organisms/Footer';
 import Navbar from '@/components/organisms/Navbar';
-import { useInformation } from '@/store/useInformation';
-import { primaryColor } from '@/data';
 
 export default function Home() {
   const router = useRouter();
-  const { dataSite } = useInformation();
-
-  console.log(dataSite);
   return (
     <main
       style={{
