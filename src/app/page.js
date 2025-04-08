@@ -10,6 +10,7 @@ import {
 import { useRouter } from 'next/navigation';
 import Footer from '@/components/organisms/Footer';
 import Navbar from '@/components/organisms/Navbar';
+import { dataSite } from '@/data';
 
 export default function Home() {
   const router = useRouter();
