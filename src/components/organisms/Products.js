@@ -67,7 +67,7 @@ export default function ProductsSection() {
                         {product.name}
                       </h3>
                       <span className="text-base font-semibold whitespace-nowrap">
-                        {formatUSD(product.price)}
+                        {formatUSD(product.price)} USD
                       </span>
                     </div>
                     <p className="text-sm text-black/70">
@@ -117,7 +117,7 @@ export default function ProductsSection() {
                       {product.name}
                     </h3>
                     <span className="text-base font-semibold whitespace-nowrap">
-                      {formatUSD(product.price)}
+                      {formatUSD(product.price)} USD
                     </span>
                   </div>
                   <p className="text-sm text-black/70">
