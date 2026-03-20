@@ -45,7 +45,7 @@ export const dataSite = {
   name: "Lexer",
   url: "https://admlexer.lat/",
   telephone: "5523070883",
-  email: "admlexer@emailsecure.lat",
+  email: "soporte@servilexer.com",
   address:
     "BLVD ADOLFO LOPEZ MATEOS 2349, PISO 4 INTERIOR B, ATLAMAYA, ALVARO OBREGON, C.P. 01760, CIUDAD DE MÉXICO.",
   description:
