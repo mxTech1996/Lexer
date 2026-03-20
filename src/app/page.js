@@ -1,19 +1,37 @@
 'use client';
+import { useEffect, useState } from 'react';
 import {
   Missions,
-  ProductSection,
   References,
   Typography,
   Hero,
-  Features,
+  Features, 
+  CartContext
 } from 'ecommerce-mxtech';
 import { useRouter } from 'next/navigation';
 import Footer from '@/components/organisms/Footer';
 import Navbar from '@/components/organisms/Navbar';
 import { dataSite } from '@/data';
+import LoginPage from './access';
+import { useContext } from 'react';
+import ProductsSection from '@/components/organisms/Products';
 
 export default function Home() {
+  const { handleAddOrRemoveProduct } = useContext(CartContext);
+  
   const router = useRouter();
+  const [isAccessSite, setIsAccessSite] = useState(() => {
+    if (typeof window === 'undefined') return null;
+    return window.location.host?.startsWith('access.');
+  });
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    setIsAccessSite(window.location.host?.startsWith('access.'));
+  }, []);
+
+  if (isAccessSite === null) return null;
+  if (isAccessSite) return <LoginPage />;
   return (
     <main
       style={{
@@ -68,7 +86,7 @@ export default function Home() {
             features={dataSite.services}
           />
         </div>
-        <div id='services'>
+        {/* <div id='services'>
           {dataSite.products.length > 1 && (
             <ProductSection
               withCategoryFilter={false}
@@ -92,7 +110,8 @@ export default function Home() {
               }}
             />
           )}
-        </div>
+        </div> */}
+        <ProductsSection />
 
         <div className='flex flex-col' id='references'>
           <Typography.Title level={3} className='font-medium mb-10 text-center'>
