@@ -354,6 +354,81 @@ export const dataSite = {
       image2: null,
       image3: null,
     },
+    {
+      id: 497,
+      name: "Process Optimization Workshop",
+      category: null,
+      description:
+        "A focused, half-day workshop designed to identify bottlenecks in your current workflows and collaboratively develop streamlined, more efficient processes for your team.",
+      price: "250",
+      stock: 100,
+      content: "Half-day interactive session, Workflow mapping, Bottleneck identification, Actionable efficiency plan.",
+      product_type: "NORMAL",
+      image:
+        "https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image2: null,
+      image3: null,
+    },
+    {
+      id: 498,
+      name: "Leadership Skills Assessment",
+      category: null,
+      description:
+        "An in-depth evaluation of a mid-level or senior manager's leadership capabilities, including a personalized report highlighting strengths and areas for professional growth.",
+      price: "180",
+      stock: 100,
+      content: "Online behavioral assessment, 360-degree feedback review, 1-hour feedback session, Personalized development report.",
+      product_type: "NORMAL",
+      image:
+        "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image2: null,
+      image3: null,
+    },
+    {
+      id: 499,
+      name: "Market Research Brief",
+      category: null,
+      description:
+        "A customized, concise report detailing current trends, key competitor movements, and emerging opportunities in your specific industry sector to inform strategic decision-making.",
+      price: "200",
+      stock: 100,
+      content: "Competitor overview, Industry trend analysis, Target demographic insights, Strategic recommendations.",
+      product_type: "NORMAL",
+      image:
+        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image2: null,
+      image3: null,
+    },
+    {
+      id: 500,
+      name: "Financial Health Review",
+      category: null,
+      description:
+        "A high-level review of your organization's recent financial statements, aimed at identifying immediate cost-saving opportunities and assessing overall fiscal stability.",
+      price: "280",
+      stock: 100,
+      content: "Review of recent statements, Expense analysis, Cash flow evaluation, Executive summary of findings.",
+      product_type: "NORMAL",
+      image:
+        "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image2: null,
+      image3: null,
+    },
+    {
+      id: 501,
+      name: "Cultural Alignment Survey",
+      category: null,
+      description:
+        "A comprehensive company-wide survey to measure employee alignment with your organization's core values and mission, helping to identify areas for cultural improvement.",
+      price: "150",
+      stock: 100,
+      content: "Customized online survey, Anonymous response collection, Data analysis, Key findings presentation.",
+      product_type: "NORMAL",
+      image:
+        "https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+      image2: null,
+      image3: null,
+    },
   ],
   categories: [],
 };
