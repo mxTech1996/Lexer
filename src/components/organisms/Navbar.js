@@ -6,7 +6,7 @@ import { Navbar as NavbarV2, theme } from "ecommerce-mxtech";
 const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
-  const isProducts = pathname === "/products";
+  const isProducts = true;
 
   return (
     <NavbarV2

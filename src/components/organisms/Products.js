@@ -30,7 +30,7 @@ export default function ProductsSection() {
   const router = useRouter();
 
   const pathname = usePathname();
-  const isProducts = pathname === "/products";
+  const isProducts = true;
   const productsOver50 = dataSite.products.filter(
     (product) => parseFloat(product.price) > 50,
   );
