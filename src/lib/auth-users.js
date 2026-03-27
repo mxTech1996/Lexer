@@ -40,8 +40,8 @@ const canUseRedisUrl = Boolean(process.env.REDIS_URL);
 
 const getKV = async () => {
   if (!canUseVercelKV) return null;
-  const module = await import("@vercel/kv");
-  return module.kv;
+  const kvModule = await import("@vercel/kv");
+  return kvModule.kv;
 };
 
 const getRedisClient = async () => {
