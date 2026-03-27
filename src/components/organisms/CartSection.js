@@ -10,6 +10,7 @@ import {
 import { useRouter } from 'next/navigation';
 import { FaChevronLeft } from 'react-icons/fa';
 import { pageName } from '@/data';
+import { useLanguage } from '@/i18n/language-provider';
 
 const validDiscountCode = ['CAPAPAY10', 'CAPAPAY20'];
 const colorRed = '#F73939';
@@ -18,6 +19,7 @@ const CartSectionComponent = () => {
   const [step, setStep] = useState('cart'); // cart | payment
   const [isValidDiscount, setIsValidDiscount] = useState(false);
   const router = useRouter();
+  const { t } = useLanguage();
 
   const onChangeDiscount = (value) => {
     setIsValidDiscount(validDiscountCode.includes(value));
@@ -27,7 +29,7 @@ const CartSectionComponent = () => {
     <div className='w-full flex justify-center mt-10 mb-20'>
       <div className='container px-4'>
         <Button
-          value='back'
+          value={t('cart.back')}
           type='default'
           onClick={() => {
             if (step === 'payment') {
@@ -40,7 +42,7 @@ const CartSectionComponent = () => {
           iconPosition='start'
           className='flex items-center mb-5 w-28'
         >
-          Back
+          {t('cart.back')}
         </Button>
         <div className='flex flex-col gap-5'>
           {step === 'cart' && (
@@ -55,7 +57,7 @@ const CartSectionComponent = () => {
               totalDiscount={isValidDiscount ? 10 : 0}
               buttonCheckoutProps={{
                 onClick: () => setStep(step === 'cart' ? 'payment' : 'cart'),
-                label: 'Go to pay',
+                label: t('cart.goToPay'),
                 className: 'bg-red-400 text-white w-full',
                 style: {
                   color: 'white',
@@ -72,17 +74,17 @@ const CartSectionComponent = () => {
               isValidDiscountCode={isValidDiscount}
               handleChangeDiscountCode={onChangeDiscount}
               buttonBuyMoreProps={{
-                label: 'Buy more',
+                label: t('cart.buyMore'),
                 onClick: () => router.push('/#products'),
               }}
               buttonGoHomeProps={{
-                label: 'Go home',
+                label: t('cart.goHome'),
                 onClick: () => router.push('/'),
               }}
               totalDiscount={isValidDiscount ? 10 : 0}
               buttonBackProps={{
                 className: 'text-black',
-                label: 'Back',
+                label: t('cart.back'),
               }}
               buttonNextProps={{
                 className: 'bg-red-500 text-white',

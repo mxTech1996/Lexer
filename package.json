@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@vercel/kv": "^2.0.0",
     "axios": "^1.6.8",
     "ecommerce-mxtech": "^0.0.62",
     "fs": "^0.0.1-security",

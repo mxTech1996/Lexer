@@ -1,11 +1,19 @@
 'use client';
-import { useRouter } from 'next/navigation';
-import { footerData } from '@/data';
 import { Footer as FooterComponent } from 'ecommerce-mxtech';
-import Link from 'next/link';
+import { useLanguage } from '@/i18n/language-provider';
 
 const Footer = () => {
-  const router = useRouter();
+  const { t } = useLanguage();
+  const footerData = [
+    {
+      href: '/pdf/AP.pdf',
+      label: t('footer.privacy'),
+    },
+    {
+      href: '/pdf/TYC.pdf',
+      label: t('footer.terms'),
+    },
+  ];
 
   return (
     <FooterComponent

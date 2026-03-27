@@ -1,9 +1,10 @@
 "use client";
 
 import { CartContext, Typography } from "ecommerce-mxtech";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { dataSite } from "@/data";
 import { useContext } from "react";
+import { useLanguage } from "@/i18n/language-provider";
 
 const formatUSD = (value) => {
   const numberValue =
@@ -27,9 +28,9 @@ const clampText = (text, maxLength) => {
 export default function ProductsSection() {
   const { handleAddOrRemoveProduct, validateProductInCart } =
     useContext(CartContext);
+  const { t } = useLanguage();
   const router = useRouter();
 
-  const pathname = usePathname();
   const isProducts = true;
   const productsOver50 = dataSite.products.filter(
     (product) => parseFloat(product.price) > 50,
@@ -41,7 +42,7 @@ export default function ProductsSection() {
     <div className="container mx-auto flex flex-col gap-20 my-24">
       <div id="services">
         <Typography.Title level={3} className="font-medium mb-10 text-center">
-          All Products
+          {t("products.allProducts")}
         </Typography.Title>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -80,7 +81,9 @@ export default function ProductsSection() {
                         className="w-full py-2 px-4 bg-black text-white rounded-md"
                         onClick={() => handleAddOrRemoveProduct(product.id)}
                       >
-                        {isInCart ? "Remove from Cart" : "Add to Cart"}
+                        {isInCart
+                          ? t("products.removeFromCart")
+                          : t("products.addToCart")}
                       </button>
                     ) : (
                       <button
@@ -88,7 +91,7 @@ export default function ProductsSection() {
                         className="w-full py-2 px-4 bg-black text-white rounded-md"
                         onClick={() => router.push("/more-information")}
                       >
-                        Contact Us
+                        {t("products.contactUs")}
                       </button>
                     )}
                   </div>
@@ -100,7 +103,7 @@ export default function ProductsSection() {
       </div>
       {/* additionals products */}
       <Typography.Title level={3} className="font-medium mb-10 text-center">
-        Our additional products
+        {t("products.additionalProducts")}
       </Typography.Title>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
         {additionalsProduts.map((product) => {
@@ -130,7 +133,9 @@ export default function ProductsSection() {
                       className="w-full py-2 px-4 bg-black text-white rounded-md"
                       onClick={() => handleAddOrRemoveProduct(product.id)}
                     >
-                      {isInCart ? "Remove from Cart" : "Add to Cart"}
+                      {isInCart
+                        ? t("products.removeFromCart")
+                        : t("products.addToCart")}
                     </button>
                   ) : (
                     <button
@@ -138,7 +143,7 @@ export default function ProductsSection() {
                       className="w-full py-2 px-4 bg-black text-white rounded-md"
                       onClick={() => router.push("/more-information")}
                     >
-                      Contact Us
+                      {t("products.contactUs")}
                     </button>
                   )}
                 </div>

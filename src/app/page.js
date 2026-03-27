@@ -5,21 +5,20 @@ import {
   References,
   Typography,
   Hero,
-  Features, 
-  CartContext
+  Features,
 } from 'ecommerce-mxtech';
-import { useRouter } from 'next/navigation';
 import Footer from '@/components/organisms/Footer';
 import Navbar from '@/components/organisms/Navbar';
 import { dataSite } from '@/data';
 import LoginPage from './access';
-import { useContext } from 'react';
 import ProductsSection from '@/components/organisms/Products';
+import { useLanguage } from '@/i18n/language-provider';
+import { getHomeDataByLanguage } from '@/i18n/home-content';
 
 export default function Home() {
-  const { handleAddOrRemoveProduct } = useContext(CartContext);
-  
-  const router = useRouter();
+  const { t, lang } = useLanguage();
+  const homeData = getHomeDataByLanguage(lang, dataSite);
+
   const [isAccessSite, setIsAccessSite] = useState(() => {
     if (typeof window === 'undefined') return null;
     return window.location.host?.startsWith('access.');
@@ -44,8 +43,8 @@ export default function Home() {
           variant='background-img'
           src={dataSite.image_hero}
           colorText='#FCFCFCFF'
-          title={dataSite.subtitle}
-          description={dataSite.description}
+          title={homeData.subtitle}
+          description={homeData.description}
           srcSecondary={dataSite.image_hero2}
           withSubView
           images={[dataSite.image_hero, dataSite.image_hero2]}
@@ -63,11 +62,11 @@ export default function Home() {
                 level={3}
                 className='font-medium mb-10 text-center text-white'
               >
-                Know Us
+                {t('home.knowUs')}
               </Typography.Title>
               <Missions
                 textColor='#fff'
-                data={dataSite.info}
+                data={homeData.info}
                 gridColumns={1}
                 variant='text'
               />
@@ -78,12 +77,12 @@ export default function Home() {
       <div className='container mx-auto flex flex-col gap-20 my-24'>
         <div className='flex flex-col' id='our-services'>
           <Typography.Title level={3} className='font-medium mb-10 text-center'>
-            Our Services
+            {t('home.ourServices')}
           </Typography.Title>
           <Features
             gridColumns={2}
             variant='card'
-            features={dataSite.services}
+            features={homeData.services}
           />
         </div>
         {/* <div id='services'>
@@ -115,7 +114,7 @@ export default function Home() {
 
         <div className='flex flex-col' id='references'>
           <Typography.Title level={3} className='font-medium mb-10 text-center'>
-            References
+            {t('home.references')}
           </Typography.Title>
           <References
             carouselOptions={{
@@ -127,7 +126,7 @@ export default function Home() {
             variantItem='card'
             variant='grid'
             backgroundColor='#BADEE5FF'
-            references={dataSite.references}
+            references={homeData.references}
             gridColumns={2}
             titleAlign='center'
           />
