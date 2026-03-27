@@ -36,11 +36,28 @@ const createSessionToken = (username) => {
 
 const canUseVercelKV =
   Boolean(process.env.KV_REST_API_URL) && Boolean(process.env.KV_REST_API_TOKEN);
+const canUseRedisUrl = Boolean(process.env.REDIS_URL);
 
 const getKV = async () => {
   if (!canUseVercelKV) return null;
   const module = await import("@vercel/kv");
   return module.kv;
+};
+
+const getRedisClient = async () => {
+  if (!canUseRedisUrl) return null;
+
+  if (!globalThis.__LEXER_REDIS_CLIENT__) {
+    const { createClient } = await import("redis");
+    const redisClient = createClient({
+      url: process.env.REDIS_URL,
+    });
+
+    await redisClient.connect();
+    globalThis.__LEXER_REDIS_CLIENT__ = redisClient;
+  }
+
+  return globalThis.__LEXER_REDIS_CLIENT__;
 };
 
 const getMemoryStore = () => {
@@ -53,6 +70,30 @@ const getMemoryStore = () => {
 const withStore = async (handler) => {
   const kv = await getKV();
   if (kv) return handler(kv);
+
+  const redisClient = await getRedisClient();
+  if (redisClient) {
+    return handler({
+      get: async (key) => {
+        const value = await redisClient.get(key);
+        if (value === null || value === undefined) return null;
+
+        try {
+          return JSON.parse(value);
+        } catch {
+          return value;
+        }
+      },
+      set: async (key, value) => {
+        const formattedValue =
+          typeof value === "string" ? value : JSON.stringify(value);
+
+        await redisClient.set(key, formattedValue);
+        return value;
+      },
+    });
+  }
+
   return handler(getMemoryStore());
 };
 
