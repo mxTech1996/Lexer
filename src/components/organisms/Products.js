@@ -5,6 +5,9 @@ import { useRouter } from "next/navigation";
 import { dataSite } from "@/data";
 import { useContext } from "react";
 import { useLanguage } from "@/i18n/language-provider";
+import { getLocalizedProducts } from "@/i18n/product-content";
+
+const USD_TO_MXN_RATE = 17;
 
 const formatUSD = (value) => {
   const numberValue =
@@ -18,6 +21,27 @@ const formatUSD = (value) => {
   }).format(numberValue);
 };
 
+const formatMXN = (value) => {
+  const numberValue =
+    typeof value === "number" ? value : Number.parseFloat(String(value));
+  if (Number.isNaN(numberValue)) return "$0";
+  return new Intl.NumberFormat("es-MX", {
+    style: "currency",
+    currency: "MXN",
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  }).format(numberValue);
+};
+
+const toMXN = (usdValue) => {
+  const numberValue =
+    typeof usdValue === "number"
+      ? usdValue
+      : Number.parseFloat(String(usdValue));
+  if (Number.isNaN(numberValue)) return 0;
+  return numberValue * USD_TO_MXN_RATE;
+};
+
 const clampText = (text, maxLength) => {
   const safeText = String(text || "").trim();
   if (!safeText) return "";
@@ -28,16 +52,35 @@ const clampText = (text, maxLength) => {
 export default function ProductsSection() {
   const { handleAddOrRemoveProduct, validateProductInCart } =
     useContext(CartContext);
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const router = useRouter();
 
   const isProducts = true;
-  const productsOver50 = dataSite.products.filter(
-    (product) => parseFloat(product.price) > 50,
+  const isSpanish = lang === "es";
+  const splitThreshold = isSpanish ? toMXN(50) : 50;
+  const localizedProducts = getLocalizedProducts(lang, dataSite.products);
+
+  const productsOver50 = localizedProducts.filter(
+    (product) => {
+      const productValue = isSpanish ? toMXN(product.price) : parseFloat(product.price);
+      return productValue > splitThreshold;
+    },
   );
-  const additionalsProduts = dataSite.products.filter(
-    (product) => parseFloat(product.price) <= 50,
+
+  const additionalsProduts = localizedProducts.filter(
+    (product) => {
+      const productValue = isSpanish ? toMXN(product.price) : parseFloat(product.price);
+      return productValue <= splitThreshold;
+    },
   );
+
+  const formatPrice = (price) => {
+    if (isSpanish) {
+      return `${formatMXN(toMXN(price))} MXN`;
+    }
+    return `${formatUSD(price)} USD`;
+  };
+
   return (
     <div className="container mx-auto flex flex-col gap-20 my-24">
       <div id="services">
@@ -68,7 +111,7 @@ export default function ProductsSection() {
                         {product.name}
                       </h3>
                       <span className="text-base font-semibold whitespace-nowrap">
-                        {formatUSD(product.price)} USD
+                        {formatPrice(product.price)}
                       </span>
                     </div>
                     <p className="text-sm text-black/70">
@@ -120,7 +163,7 @@ export default function ProductsSection() {
                       {product.name}
                     </h3>
                     <span className="text-base font-semibold whitespace-nowrap">
-                      {formatUSD(product.price)} USD
+                      {formatPrice(product.price)}
                     </span>
                   </div>
                   <p className="text-sm text-black/70">
