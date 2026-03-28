@@ -1,15 +1,22 @@
 "use client";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useContext } from "react";
 import { dataSite } from "@/data";
 import { useLanguage } from "@/i18n/language-provider";
+import { CartContext } from "ecommerce-mxtech";
+import { FiShoppingCart } from "react-icons/fi";
 
 const Navbar = () => {
   const router = useRouter();
   const pathname = usePathname();
   const { t, lang, setLanguage } = useLanguage();
+  const {products} = useContext(CartContext) || {};
   const isProducts = pathname === "/products";
   const isAccess = pathname === "/access";
+
+
+  const cartCount = products.length;
 
   const links = [
     {
@@ -94,9 +101,21 @@ const Navbar = () => {
             <button
               type="button"
               onClick={() => router.push(isProducts ? "/my-cart" : "/more-information")}
-              className="px-3 py-2 text-sm font-semibold rounded-md border border-black/20 hover:bg-black hover:text-white transition-colors"
+              className="px-3 py-2 text-sm font-semibold rounded-md border border-black/20 hover:bg-black hover:text-white transition-colors inline-flex items-center gap-2"
             >
-              {isProducts ? t("nav.cart") : t("nav.contactUs")}
+              {isProducts ? (
+                <>
+                  <FiShoppingCart className="text-base" />
+                  {/* <span>{t("nav.cart")}</span> */}
+                {cartCount > 0 && (
+                  <span className="min-w-5 h-5 px-1 rounded-full bg-black text-white text-xs flex items-center justify-center">
+                    {cartCount}
+                  </span>
+                )}
+                </>
+              ) : (
+                t("nav.contactUs")
+              )}
             </button>
           )}
         </div>
