@@ -12,7 +12,7 @@ const Navbar = () => {
   const pathname = usePathname();
   const { t, lang, setLanguage } = useLanguage();
   const {products} = useContext(CartContext) || {};
-  const isProducts = pathname === "/products";
+  const isProducts = true
   const isAccess = pathname === "/access";
 
 

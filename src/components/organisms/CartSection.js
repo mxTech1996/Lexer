@@ -18,11 +18,28 @@ const colorRed = '#F73939';
 const CartSectionComponent = () => {
   const [step, setStep] = useState('cart'); // cart | payment
   const [isValidDiscount, setIsValidDiscount] = useState(false);
+  const [authError, setAuthError] = useState('');
   const router = useRouter();
   const { t } = useLanguage();
 
   const onChangeDiscount = (value) => {
     setIsValidDiscount(validDiscountCode.includes(value));
+  };
+
+  const handleGoToPayment = () => {
+    const storedUser =
+      typeof window !== 'undefined'
+        ? window.localStorage.getItem('lexer:auth-user')
+        : null;
+
+    if (!storedUser) {
+      setAuthError(t('cart.authRequired'));
+      router.push('/access?redirect=/my-cart?step=payment');
+      return;
+    }
+
+    setAuthError('');
+    setStep('payment');
   };
 
   return (
@@ -45,6 +62,8 @@ const CartSectionComponent = () => {
           {t('cart.back')}
         </Button>
         <div className='flex flex-col gap-5'>
+          {authError && <p className='text-sm text-destructive'>{authError}</p>}
+
           {step === 'cart' && (
             <CartSectionV2
               variant='table'
@@ -56,7 +75,7 @@ const CartSectionComponent = () => {
               isValidDiscountCode={isValidDiscount}
               totalDiscount={isValidDiscount ? 10 : 0}
               buttonCheckoutProps={{
-                onClick: () => setStep(step === 'cart' ? 'payment' : 'cart'),
+                onClick: handleGoToPayment,
                 label: t('cart.goToPay'),
                 className: 'bg-red-400 text-white w-full',
                 style: {

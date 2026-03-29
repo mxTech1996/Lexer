@@ -1,12 +1,14 @@
 "use client";
 
 import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useLanguage } from "@/i18n/language-provider";
 
 export default function LoginPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { t } = useLanguage();
+  const redirectPath = searchParams.get("redirect") || "/products";
 
   const [mode, setMode] = useState("login");
   const [isLoading, setIsLoading] = useState(false);
@@ -53,7 +55,7 @@ export default function LoginPage() {
       }
 
       window.localStorage.setItem("lexer:auth-user", JSON.stringify(data.user));
-      router.push("/products");
+      router.push(redirectPath);
     } catch (requestError) {
       setError(t("access.genericError"));
     } finally {

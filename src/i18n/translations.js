@@ -37,6 +37,7 @@ export const translations = {
       goToPay: "Ir a pagar",
       buyMore: "Comprar mas",
       goHome: "Ir al inicio",
+      authRequired: "Necesitas iniciar sesion o registrarte para pagar.",
     },
     access: {
       signInTab: "Iniciar sesion",
@@ -97,6 +98,7 @@ export const translations = {
       goToPay: "Go to pay",
       buyMore: "Buy more",
       goHome: "Go home",
+      authRequired: "You need to sign in or sign up before checkout.",
     },
     access: {
       signInTab: "Sign in",

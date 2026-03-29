@@ -10,7 +10,7 @@ import {
 import Footer from '@/components/organisms/Footer';
 import Navbar from '@/components/organisms/Navbar';
 import { dataSite } from '@/data';
-import LoginPage from './access';
+import LoginPage from './access.js';
 import ProductsSection from '@/components/organisms/Products';
 import { useLanguage } from '@/i18n/language-provider';
 import { getHomeDataByLanguage } from '@/i18n/home-content';
