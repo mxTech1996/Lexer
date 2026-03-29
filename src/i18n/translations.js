@@ -15,6 +15,10 @@ export const translations = {
       knowUs: "Conocenos",
       contactUs: "Contactanos",
       cart: "Carrito",
+      signIn: "Iniciar sesion",
+      signOut: "Cerrar sesion",
+      openMenu: "Abrir menu",
+      closeMenu: "Cerrar menu",
     },
     footer: {
       privacy: "Privacidad",
@@ -76,6 +80,10 @@ export const translations = {
       knowUs: "Know Us",
       contactUs: "Contact Us",
       cart: "Cart",
+      signIn: "Sign in",
+      signOut: "Sign out",
+      openMenu: "Open menu",
+      closeMenu: "Close menu",
     },
     footer: {
       privacy: "Privacy",
